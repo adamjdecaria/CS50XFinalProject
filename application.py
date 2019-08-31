@@ -171,8 +171,8 @@ def register():
         # remember the username of the user logged in
         session["username"] = rows[0]["username"]
 
-        # Redirect user to quote page
-        # flash("Registered!", "success")
+        # Redirect user to blog post page
+        flash("Registered!", "success")
         return render_template("index.html")
 
     else:
@@ -197,6 +197,12 @@ def post_blog():
 
     # return index.html
     return render_template("index.html", data = data)
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+
+    data = db.execute("SELECT * FROM blogs WHERE (username=:username)", username=request.form.get("username"))
+    return render_template("search_results.html", data = data)
 
 
 def errorhandler(e):
