@@ -66,18 +66,6 @@ def check():
             return jsonify(True)
 
 
-@app.route("/history")
-@login_required
-def history():
-    """Show history of transactions"""
-
-    # pull raw transaction data from DB
-    data = db.execute("SELECT symbol, shares, price, transacted FROM transactions WHERE id = :user_id", user_id=session["user_id"])
-
-    # return history page with data to populate history table
-    return render_template("history.html", data=data)
-
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""

@@ -38,11 +38,11 @@
 
         document.getElementById("send_form").onclick = function(data) {
             $.get("/check", {username: username.value}, function(data) {
-                if (data == true) {
+                if (data == false) {
                     document.forms["form"].submit();
                 }
                 else {
-                    alert("Sorry - that username is taken!");
+                    alert("Sorry - we didn't find the blog you're looking for!");
                 }
             });
         };
